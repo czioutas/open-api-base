@@ -1,0 +1,38 @@
+name: Bump version
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  build:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0
+      with:
+        versionSpec: '5.x'
+
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.pull_request.merge_commit_sha }}
+        fetch-depth: '0'
+
+    - name: Determine Version
+      id:   gitversion # id to later be referenced
+      uses: gittools/actions/gitversion/execute@v0
+      with:
+        useConfigFile: true
+
+    - name: Create a GitHub release
+      uses: ncipollo/release-action@v1
+      with:
+        tag:  v${{ steps.gitversion.outputs.major }}.${{steps.gitversion.outputs.minor}}.${{steps.gitversion.outputs.patch}}
+        name: Release v${{ steps.gitversion.outputs.major }}.${{steps.gitversion.outputs.minor}}.${{steps.gitversion.outputs.patch}}
+        body: ${{ steps.tag_version.outputs.changelog }}
