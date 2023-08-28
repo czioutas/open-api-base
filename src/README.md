@@ -17,7 +17,7 @@ We release using GitVersion (https://github.com/GitTools/GitVersion) https://git
 ```
 major-version-bump-message: '\+semver:\s?(breaking|major)'
 minor-version-bump-message: '\+semver:\s?(feature|minor)'
-patch-version-bump-message: '\+semver:\s?(fix|patch)'
+patch-version-bump-message: '\+semver:\s?(fix|patch|task|info)'
 ```
 
 For example, a commit message for a feature should look like this `+semver: feature ` following the description of the changes.

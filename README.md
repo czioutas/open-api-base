@@ -36,4 +36,4 @@ This codebase is using the MIT License and therefore is available to be used how
 A mention of this [repo](https://github.com/czioutas/open-api-base) or [myself](https://twitter.com/czioutas) would be greatly be appreciated. 🙇‍♂️
  
 ### More
-You can follow the journey of development on twitter.
+You can follow the journey of development on twitter [here](https://twitter.com/czioutas/thread/1696242160536797467) and the blog posts [here](https://czioutastech.substack.com/t/openapibase)
