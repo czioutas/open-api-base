@@ -11,6 +11,7 @@ README within the main src folder.
 - [Editor](#editor)
 - [Logging](#logging)
 - [Swagger](#swagger)
+- [Authentication](#authentication)
 - [Links](#🔗-links)
 
 ---
@@ -78,6 +79,36 @@ transports. If you wish to change the logging service, all you need to do is add
 ---
 
 ### Swagger
+
+---
+
+### Authentication
+
+The authentication system works on a passwordless system. Any user is able to register or login and they will be sent a
+magic link which allows them to get an `AuthSuccess` payload.
+
+```
+/**
+ * This class is a wrapper dto that is sent after authentication.
+ * The idToken is used to get an accessToken
+ */
+export class AuthSuccessDto {
+  idToken: string;
+  refreshToken: string;
+  userId: string;
+}
+```
+
+If we deconstruct the above we see 3 different properties:
+
+- idToken: This is the JWT-Token which you can exchange for an AccessToken. IdTokens are only used for acquiring the
+  AccessToken and do not have any other access.
+
+- refreshToken: This is another JWT-Token which is used to get a new IdToken after the current IdToken has expired. This
+  is commonly used when a user has logged in but is inactive for X period of time. Then instead of forcing them through
+  the whole re-login process we use the refreshToken to get our Tokens refreshed.
+
+- userId: Quite self-explanatory, the Id of the user.
 
 ---
 
