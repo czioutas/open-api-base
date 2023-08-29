@@ -7,7 +7,7 @@ This repository contains a free API written, with the aim to provide a fully fle
 - [Steps](#steps)
 - [Features](#features)
 - [Technologies](#technologies)
-- [Code README](src/README.md)
+- [Code README](core/README.md)
 - [License](#license)
 
 
@@ -20,7 +20,7 @@ This repository contains a free API written, with the aim to provide a fully fle
 
 ### Features
 
-- Logging
+- Configuration (via .env files) used by DI
 
 ### Technologies
 
