@@ -1,4 +1,4 @@
-# ⚡ Open-API-Base
+# ⚡ Open-API-Base [![API CI](https://github.com/czioutas/open-api-base/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/czioutas/open-api-base/actions/workflows/ci.yml)
 
 This repository contains a free API written, with the aim to provide a fully fledged API system that can support your project from start to thousands of users/calls etc without the need of external services except infrastructure components such as Databases, Cache layers, Mailing systems etc.
 
