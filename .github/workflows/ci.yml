@@ -29,10 +29,13 @@ jobs:
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v0
         with:
-          versionSpec: '5.x'
+          versionSpec: "5.x"
+
+      - name: Rename .env.testing
+        run: mv ../.env.testing ../.env
 
       - name: Determine Version
-        id:   gitversion # id to later be referenced
+        id: gitversion # id to later be referenced
         uses: gittools/actions/gitversion/execute@v0
         with:
           useConfigFile: true
