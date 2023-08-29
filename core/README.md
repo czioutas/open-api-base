@@ -10,6 +10,7 @@ README within the main src folder.
 - [Git Specifics](#git)
 - [Editor](#editor)
 - [Logging](#logging)
+- [Swagger](#swagger)
 - [Links](#🔗-links)
 
 ---
@@ -76,12 +77,16 @@ transports. If you wish to change the logging service, all you need to do is add
 
 ---
 
+### Swagger
+
+---
+
 ### 🔗 Links
 
 | Function         | ENV   | URL                            |
 | :--------------- | :---- | :----------------------------- |
 | Base URL         | Local | http://localhost:3000/         |
-| API HealthCheck  | Local | http://localhost:8000/v2       |
+| API HealthCheck  | Local | http://localhost:8000/v1       |
 | API Swagger UI   | Local | http://localhost:8000/api      |
 | API Swagger JSON | Local | http://localhost:8000/api-json |
 
