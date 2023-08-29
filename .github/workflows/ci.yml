@@ -32,7 +32,7 @@ jobs:
           versionSpec: "5.x"
 
       - name: Rename .env.testing
-        run: mv ../.env.testing ../.env
+        run: mv .env.testing .env
 
       - name: Determine Version
         id: gitversion # id to later be referenced
