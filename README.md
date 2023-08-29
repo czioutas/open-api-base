@@ -10,8 +10,8 @@ This repository contains a free API written, with the aim to provide a fully fle
 - [Code README](core/README.md)
 - [License](#license)
 
-
 ## Steps
+
 - copy repo
 - rename namespace if you prefer
 - adapt the .env file with any service you wish to use
@@ -21,6 +21,7 @@ This repository contains a free API written, with the aim to provide a fully fle
 ### Features
 
 - Configuration (via .env files) used by DI
+- Logging (The API uses [Logtail](https://betterstack.com/) but you can switch to any provider)
 
 ### Technologies
 
@@ -34,6 +35,7 @@ This repository contains a free API written, with the aim to provide a fully fle
 
 This codebase is using the MIT License and therefore is available to be used however the actor decides.
 A mention of this [repo](https://github.com/czioutas/open-api-base) or [myself](https://twitter.com/czioutas) would be greatly be appreciated. 🙇‍♂️
- 
+
 ### More
+
 You can follow the journey of development on twitter [here](https://twitter.com/czioutas/thread/1696242160536797467) and the blog posts [here](https://czioutastech.substack.com/t/openapibase)

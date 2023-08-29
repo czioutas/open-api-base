@@ -1,7 +1,3 @@
-# compiled output
-/dist
-/node_modules
-
 # Logs
 logs
 *.log
@@ -33,14 +29,3 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-
-local.env
-qa.env
-prod.env
-
-migrate
-
-API/test/coverage
-test-results-e2e.json
-test-results-unit.json
-junit.xml

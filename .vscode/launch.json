@@ -5,34 +5,25 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch API",
+      "name": "Launch API (LOCAL)",
       "request": "launch",
-      "runtimeArgs": [
-        "run",
-        "start:debug"
-      ],
+      "runtimeArgs": ["run", "start:debug"],
       "runtimeExecutable": "npm",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
+      "skipFiles": ["<node_internals>/**"],
       "type": "pwa-node",
       "console": "integratedTerminal",
       "cwd": "${workspaceRoot}/core",
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "local"
       }
     },
     {
       "name": "Debug Jest Tests",
       "type": "node",
       "request": "launch",
-      "runtimeArgs": [
-        "--inspect-brk",
-        "${workspaceRoot}/node_modules/.bin/jest",
-        "--runInBand"
-      ],
+      "runtimeArgs": ["--inspect-brk", "${workspaceRoot}/node_modules/.bin/jest", "--runInBand"],
       "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
+      "internalConsoleOptions": "neverOpen"
     }
   ]
 }
