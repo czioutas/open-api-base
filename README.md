@@ -38,4 +38,4 @@ A mention of this [repo](https://github.com/czioutas/open-api-base) or [myself](
 
 ### More
 
-You can follow the journey of development on twitter [here](https://twitter.com/czioutas/thread/1696242160536797467) and the blog posts [here](https://czioutastech.substack.com/t/openapibase)
+You can follow the journey of development on twitter [here](https://twitter.com/czioutas/thread/1696242160536797467) and the blog posts [here](https://openapibase.com/blog/)
