@@ -1,8 +1,19 @@
 import { NestFactory } from '@nestjs/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { configuration } from './app.config';
 import { AppModule } from './app.module';
+import { logger } from './logging';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(process.env.APP_PORT || 3000);
+  const appConfig = configuration().appRuntime;
+
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    logger,
+    rawBody: true,
+    cors: true,
+  });
+
+  await app.listen(appConfig.appPort || 3000);
 }
+
 bootstrap();
