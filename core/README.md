@@ -2,9 +2,19 @@
 Even though some of the info here span across the repo, such as the Version system. We detail it inside this Technical README within the main src folder.
 
 ### Table of Contents
+- [Application](#application)
 - [Versioning](#versioning)
 - [Git Specifics](#git)
 - [Editor](#editor)
+- [Links](#🔗-links)
+
+***
+
+### Application
+
+The application runs by default on port 3000. Please edit the .env.YOUR-ENV file to change it.
+
+***
 
 ### Versioning
 
@@ -24,6 +34,8 @@ For example, a commit message for a feature should look like this `+semver: feat
 
 Refer to the [GitVersion.yml](../GitVersion.yml) file for changes.
 
+***
+
 ### Git
 
 In order to maintain consistency across any usage of the repo there are a few Git related changes. 
@@ -32,6 +44,8 @@ In order to maintain consistency across any usage of the repo there are a few Gi
 
 - Using the [.gitignore](../.gitignore) file we make sure that not every file inside the repo when created locally is pushed to the remote repository. For example, test result results generated during local testing.
 
+***
+
 ### Editor
 
 In order to keep a uniform style of the codebase, we employ the use of the [Editorconfig](../.editorconfig) file.
@@ -39,3 +53,16 @@ In order to keep a uniform style of the codebase, we employ the use of the [Edit
 Most code editors/IDE these days support the use of this file.
 
 It is worth mentioning that .editorconfig files work on a hierarchy based on folder levels. Therefore if you wish to have in one folder a different style you are free to add another .editorconfig file.
+
+***
+
+### 🔗 Links
+
+| Function                 | ENV   | URL                                                                                             |
+| :----------------------- | :---- | :---------------------------------------------------------------------------------------------- |
+| Base URL                 | Local | http://localhost:3000/                                                                          |
+| API HealthCheck          | Local | http://localhost:8000/v2                                                                        |
+| API Swagger UI           | Local | http://localhost:8000/api                                                                       |
+| API Swagger JSON         | Local | http://localhost:8000/api-json                                                                  |
+
+<br/>
