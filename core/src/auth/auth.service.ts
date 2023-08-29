@@ -38,7 +38,7 @@ export class AuthService {
   }
 
   private async sendLoginEmailAsync(userDto: UserDto): Promise<void> {
-    const loginToken = await this.createTokenForMagicLink(userDto);
+    const loginToken = await this.createTokenForMagicLinkAsync(userDto);
     console.log(loginToken);
 
     // const magicLink = `${this.feDomain}/auth/callback/?token=${loginToken}`;
@@ -47,7 +47,7 @@ export class AuthService {
     // });
   }
 
-  private async createTokenForMagicLink(userDto: UserDto): Promise<string> {
+  async createTokenForMagicLinkAsync(userDto: UserDto): Promise<string> {
     return await this.jwtService.signAsync(
       { ...userDto },
       {

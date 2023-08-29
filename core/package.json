@@ -17,7 +17,8 @@
     "test:watch": "jest --config ./test/jest-unit.config.ts --watch",
     "test:cov": "jest --config ./test/jest-unit.config.ts --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.config.ts --json --outputFile=test-results-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.config.ts --json --outputFile=test-results-e2e.json",
+    "test:controller": "jest --config ./test/jest-controller.config.ts --json --outputFile=test-results-controller.json"
   },
   "dependencies": {
     "@automapper/classes": "^8.7.7",
