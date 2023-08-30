@@ -18,7 +18,13 @@
     "test:cov": "jest --config ./test/jest-unit.config.ts --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.config.ts --json --outputFile=test-results-e2e.json",
-    "test:controller": "jest --config ./test/jest-controller.config.ts --json --outputFile=test-results-controller.json"
+    "test:controller": "jest --config ./test/jest-controller.config.ts --json --outputFile=test-results-controller.json",
+    "typeorm": "ts-node --project ./tsconfig.json -r tsconfig-paths/register ./node_modules/typeorm/cli",
+    "typeorm:apply-migrations": "npm run typeorm migration:run -- -d ./typeOrm.config.ts",
+    "typeorm:generate-migration": "npm run typeorm migration:generate ./src/migrations/m -- -d ./typeOrm.config.ts",
+    "typeorm:create-migration": "npm run typeorm migration:create ./src/migrations/m -- -d ./typeOrm.config.ts",
+    "typeorm:revert-migration": "npm run typeorm -- -d ./typeOrm.config.ts migration:revert",
+    "typeorm:drop-schema": "npm run typeorm -- -d ./typeOrm.config.ts schema:drop"
   },
   "dependencies": {
     "@automapper/classes": "^8.7.7",
@@ -33,14 +39,18 @@
     "@nestjs/passport": "^10.0.1",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/swagger": "^7.1.9",
+    "@nestjs/typeorm": "^10.0.0",
     "@sendgrid/mail": "^7.7.0",
     "@timonmasberg/automapper-nestjs": "^0.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "dotenv": "^16.3.1",
     "nest-winston": "^1.9.4",
     "passport-jwt": "^4.0.1",
+    "pg": "^8.11.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
+    "typeorm": "^0.3.17",
     "uuid": "^9.0.0",
     "winston": "^3.10.0",
     "winston-daily-rotate-file": "^4.7.1"

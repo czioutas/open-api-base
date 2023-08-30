@@ -1,35 +1,35 @@
+import { CreateUserDto } from '@app/users/dto/create-user.dto';
 import { UserDto } from '@app/users/dto/user.dto';
-import { faker } from '@faker-js/faker';
+import { UserEntity } from '@app/users/user.entity';
+import { UserRepository } from '@app/users/user.repository';
+import { Mapper } from '@automapper/core';
 import { Injectable } from '@nestjs/common';
+import { InjectMapper } from '@timonmasberg/automapper-nestjs';
 
 @Injectable()
 export class UserService {
-  private readonly users: UserDto[] = [
-    {
-      id: '751d2f8c-7d11-4003-816c-0081c5797cdd',
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
-      email: 'bob@bob.com',
-    },
-    {
-      id: '3cde466b-a5eb-40ad-8db1-7ea3d936d5ca',
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
-      email: faker.internet.email(),
-    },
-    {
-      id: 'e44c3af5-d069-4f49-8204-20fc5ed9baa3',
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
-      email: faker.internet.email(),
-    },
-  ];
+  constructor(
+    private repository: UserRepository,
+    @InjectMapper() private readonly classMapper: Mapper,
+  ) {}
 
-  async findOneByEmailAsync(email: string): Promise<UserDto> {
-    return this.users.find((user) => user.email === email);
+  async findOneByEmailAsync(email: string): Promise<UserDto | null> {
+    const userEntity = await this.repository.findOneBy({ email: email });
+
+    return await this.classMapper.mapAsync(userEntity, UserEntity, UserDto);
   }
 
   async findOneByIdAsync(id: string): Promise<UserDto> {
-    return this.users.find((user) => user.id === id);
+    const userEntity = await this.repository.findOneBy({ id: id });
+
+    return await this.classMapper.mapAsync(userEntity, UserEntity, UserDto);
+  }
+
+  async createAsync(createDto: CreateUserDto): Promise<UserDto> {
+    let userEntity: UserEntity = await this.classMapper.mapAsync(createDto, CreateUserDto, UserEntity);
+
+    userEntity = await this.repository.save(userEntity);
+
+    return await this.classMapper.mapAsync(userEntity, UserEntity, UserDto);
   }
 }

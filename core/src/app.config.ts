@@ -1,6 +1,7 @@
 export const APP_RUNTIME_CONFIG = 'appRuntime';
 export const JWT_CONFIG = 'jwt';
 export const SENDGRID_CONFIG = 'sendgrid';
+export const PGSQL_CONFIG = 'pgsql';
 
 export interface AppRuntimeConfig {
   appDomain: string;
@@ -27,6 +28,18 @@ export interface SendGridConfig {
   senderEmail: string;
 }
 
+export interface PgsqlDbConfig {
+  appRuntimeUsername: string;
+  appRuntimeUserPassword: string;
+  dbName: string;
+  host: string;
+  port: number;
+  shouldUseSsl: boolean;
+  rejectUnauthorized: boolean;
+  dropDb: boolean;
+  runMigrations: boolean;
+}
+
 export const configuration = () => ({
   appRuntime: {
     appDomain: process.env.APP_DOMAIN,
@@ -51,5 +64,16 @@ export const configuration = () => ({
       magicLinkEmailId: process.env.SENDGRID_MAGIC_LINK_EMAIL_ID,
     },
     senderEmail: process.env.SENDGRID_SENDER_EMAIL,
+  },
+  pgsql: {
+    host: process.env.POSTGRES_HOST,
+    appRuntimeUsername: process.env.APP_RUNTIME_USER,
+    appRuntimeUserPassword: process.env.APP_RUNTIME_USER_PASSWORD,
+    dbName: process.env.POSTGRES_DB,
+    port: process.env.POSTGRES_PORT,
+    shouldUseSsl: process.env.POSTGRES_SHOULD_USE_SSL,
+    rejectUnauthorized: process.env.POSTGRES_REJECT_UNAUTHORIZED,
+    dropDb: process.env.POSTGRES_DROP_DB,
+    runMigrations: process.env.POSTGRES_RUN_MIGRATIONS,
   },
 });

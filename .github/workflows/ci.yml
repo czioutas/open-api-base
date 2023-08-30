@@ -12,6 +12,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: test
     defaults:
       run:
         working-directory: ./core/
@@ -52,7 +53,22 @@ jobs:
       - name: Build App
         run: npm run build --if-present
 
+      - name: Drop Db & Apply Migrations on CI DB
+        with:
+        env:
+          POSTGRES_HOST: ${{ secrets.CI_DB_HOST }}
+          APP_RUNTIME_USER: ${{ secrets.CI_DB_USERNAME }}
+          APP_RUNTIME_USER_PASSWORD: ${{ secrets.CI_DB_HOST }}
+        run: |
+          npm run typeorm:drop-schema
+          npm run typeorm::apply-migrations
+
       - name: Run e2e tests
+        with:
+        env:
+          POSTGRES_HOST: ${{ secrets.CI_DB_HOST }}
+          APP_RUNTIME_USER: ${{ secrets.CI_DB_USERNAME }}
+          APP_RUNTIME_USER_PASSWORD: ${{ secrets.CI_DB_HOST }}
         run: npm run test:e2e
 
       - name: Run controller tests
