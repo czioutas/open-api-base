@@ -54,3 +54,6 @@ jobs:
 
       - name: Run e2e tests
         run: npm run test:e2e
+
+      - name: Run controller tests
+        run: npm run test:controller
