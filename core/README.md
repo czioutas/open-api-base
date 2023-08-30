@@ -84,8 +84,12 @@ transports. If you wish to change the logging service, all you need to do is add
 
 ### Authentication
 
-The authentication system works on a passwordless system. Any user is able to register or login and they will be sent a
-magic link which allows them to get an `AuthSuccess` payload.
+The authentication system uses a "MagicLink"/"Passwordless" approach. There is no password involved and the only way for
+the user to be authenticated is by clicking on a link which is sent via Email.
+
+The flow is as follows: login/register -> sent email with magic link -> receive JWT token bundle
+
+The JWT Token bundle contains the following:
 
 ```
 /**
