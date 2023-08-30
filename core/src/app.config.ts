@@ -1,5 +1,6 @@
 export const APP_RUNTIME_CONFIG = 'appRuntime';
 export const JWT_CONFIG = 'jwt';
+export const SENDGRID_CONFIG = 'sendgrid';
 
 export interface AppRuntimeConfig {
   appDomain: string;
@@ -20,6 +21,12 @@ export interface JwtConfig {
   magicLinkTokenExpiration: string;
 }
 
+export interface SendGridConfig {
+  apiKey: string;
+  templates: { [key: string]: string };
+  senderEmail: string;
+}
+
 export const configuration = () => ({
   appRuntime: {
     appDomain: process.env.APP_DOMAIN,
@@ -37,5 +44,12 @@ export const configuration = () => ({
     refreshIdTokenExpiration: process.env.JWT_REFRESH_ID_TOKEN_EXPIRATION,
     magicLinkTokenSecret: process.env.JWT_MAGICLINK_SECRET,
     magicLinkTokenExpiration: process.env.JWT_MAGICLINK_EXPIRATION,
+  },
+  sendgrid: {
+    apiKey: process.env.SENDGRID_API_KEY,
+    templates: {
+      magicLinkEmailId: process.env.SENDGRID_MAGIC_LINK_EMAIL_ID,
+    },
+    senderEmail: process.env.SENDGRID_SENDER_EMAIL,
   },
 });

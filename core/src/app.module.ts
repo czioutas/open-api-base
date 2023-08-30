@@ -17,6 +17,7 @@ import { AutomapperModule } from '@timonmasberg/automapper-nestjs';
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './users/user.module';
+import { CommunicationModule } from './communication/communication.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { UserModule } from './users/user.module';
     }),
     UserModule,
     AuthModule,
+    CommunicationModule,
   ],
   controllers: [AppController, AuthController],
   providers: [

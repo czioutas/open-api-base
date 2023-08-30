@@ -1,4 +1,6 @@
 import { AuthService } from '@app/auth/auth.service';
+import { EmailService } from '@app/communication/email.service';
+import { createMock } from '@golevelup/ts-jest';
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import request from 'supertest';
@@ -8,10 +10,16 @@ describe('AuthController (e2e)', () => {
   let app: INestApplication;
   let authService: AuthService;
 
+  const emailServiceMock = createMock<EmailService>();
+
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
-    }).compile();
+      providers: [],
+    })
+      .overrideProvider(EmailService)
+      .useValue(emailServiceMock)
+      .compile();
 
     app = moduleFixture.createNestApplication();
     await app.init();
@@ -19,7 +27,7 @@ describe('AuthController (e2e)', () => {
     authService = await moduleFixture.resolve<AuthService>(AuthService);
   });
 
-  it('request-email-login for existing user should return 204', () => {
+  it('request-email-login for existing user should return 204', async () => {
     const path = `/auth/request-email-login?email=bob%40bob.com`;
     return request(app.getHttpServer()).get(path).expect(204);
   });

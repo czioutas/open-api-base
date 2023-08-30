@@ -2,6 +2,8 @@ import { JWT_CONFIG, JwtConfig } from '@app/app.config';
 import { AuthSuccessDto } from '@app/auth/dto/auth-success.dto';
 import { RefreshTokenPayload } from '@app/auth/dto/refresh-token-payload.dto';
 import { TokenPayloadDto } from '@app/auth/dto/token-payload.dto';
+import { EmailService } from '@app/communication/email.service';
+import { EmailTemplate } from '@app/communication/email_templates.enum';
 import { UserDto } from '@app/users/dto/user.dto';
 import { Permission } from '@app/users/enums/permissions.enum';
 import { UserService } from '@app/users/user.service';
@@ -17,6 +19,7 @@ export class AuthService {
     private userService: UserService,
     private readonly jwtService: JwtService,
     configService: ConfigService,
+    private emailService: EmailService,
   ) {
     this.jwtConfig = configService.get<JwtConfig>(JWT_CONFIG);
   }
@@ -39,12 +42,11 @@ export class AuthService {
 
   private async sendLoginEmailAsync(userDto: UserDto): Promise<void> {
     const loginToken = await this.createTokenForMagicLinkAsync(userDto);
-    console.log(loginToken);
 
-    // const magicLink = `${this.feDomain}/auth/callback/?token=${loginToken}`;
-    // await this.emailService.sendEmailAsync(payload.email, EmailTemplate.Login, {
-    //   magicLink,
-    // });
+    const magicLink = `/auth/magiclink-callback/?token=${loginToken}`;
+    await this.emailService.sendEmailAsync(userDto.email, EmailTemplate.MagicLinkEmail, {
+      magicLink,
+    });
   }
 
   async createTokenForMagicLinkAsync(userDto: UserDto): Promise<string> {

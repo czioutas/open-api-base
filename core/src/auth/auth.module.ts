@@ -2,6 +2,7 @@ import { JWT_CONFIG, JwtConfig } from '@app/app.config';
 import { JwtMagicLinkStrategy } from '@app/auth/strategies/jwt-magiclink.strategy';
 import { JwtRefreshStrategy } from '@app/auth/strategies/jwt-refresh.strategy';
 import { JwtStrategy } from '@app/auth/strategies/jwt.strategy';
+import { CommunicationModule } from '@app/communication/communication.module';
 import { UserModule } from '@app/users/user.module';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -12,6 +13,7 @@ import { AuthService } from './auth.service';
 @Module({
   imports: [
     UserModule,
+    CommunicationModule,
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
