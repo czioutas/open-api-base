@@ -22,6 +22,9 @@ This repository contains a free API written, with the aim to provide a fully fle
 
 - Configuration (via .env files) used by DI
 - Logging (The API uses [Logtail](https://betterstack.com/) but you can switch to any provider)
+- Authentication (MagicLink/Passwordless)
+- Email Communication (The API uses [Sendgrid](https://sendgrid.com/) but you can switch to any provider)
+- Exception handling
 
 ### Technologies
 

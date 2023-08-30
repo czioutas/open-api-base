@@ -5,7 +5,7 @@
     "source.fixAll.eslint": true,
     "source.fixAll.tslint": true,
     "source.fixAll.stylelint": true
-   },
+  },
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.updateImportsOnFileMove.enabled": "always",
@@ -19,5 +19,6 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
-   }
+  },
+  "cSpell.words": ["Passwordless", "SENDGRID"]
 }

@@ -1,3 +1,4 @@
+import { Public } from '@app/auth/decorators/public.decorator';
 import { Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -6,7 +7,7 @@ import { ApiTags } from '@nestjs/swagger';
   path: '/',
   version: '1',
 })
-@Controller()
+@Public()
 export class AppController {
   constructor() {}
 
