@@ -62,13 +62,10 @@ jobs:
       - name: Build App
         run: npm run build --if-present
 
-      - name: Print name
-        run: echo "Hello $NAME"
-
       - name: Drop Db & Apply Migrations on CI DB
         run: |
           npm run typeorm:drop-schema
-          npm run typeorm::apply-migrations
+          npm run typeorm:apply-migrations
 
       - name: Run e2e tests
         run: npm run test:e2e
