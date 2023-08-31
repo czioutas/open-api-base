@@ -2,6 +2,13 @@
 
 This repository contains a free API written, with the aim to provide a fully fledged API system that can support your project from start to thousands of users/calls etc without the need of external services except infrastructure components such as Databases, Cache layers, Mailing systems etc.
 
+## Why?
+
+This API is built upon a decade plus of experience.
+In addition we are real time capturing the **active** coding hours using wakatime which you can see 👉 [![wakatime](https://wakatime.com/badge/github/czioutas/open-api-base.svg)](https://wakatime.com/badge/github/czioutas/open-api-base)
+
+_this does not include, build time, waiting for CI, googling, etc._
+
 # Table of Contents
 
 - [Steps](#steps)
