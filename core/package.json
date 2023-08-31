@@ -21,7 +21,7 @@
     "test:controller": "jest --config ./test/jest-controller.config.ts --json --outputFile=test-results-controller.json",
     "typeorm": "ts-node --project ./tsconfig.json -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "typeorm:apply-migrations": "npm run typeorm migration:run -- -d ./typeOrm.config.ts",
-    "typeorm:generate-migration": "npm run typeorm migration:generate ./src/migrations/m -- -d ./typeOrm.config.ts",
+    "typeorm:generate-migration": "npm run typeorm migration:generate ./src/migrations/ma -- -d ./typeOrm.config.ts",
     "typeorm:create-migration": "npm run typeorm migration:create ./src/migrations/m -- -d ./typeOrm.config.ts",
     "typeorm:revert-migration": "npm run typeorm -- -d ./typeOrm.config.ts migration:revert",
     "typeorm:drop-schema": "npm run typeorm -- -d ./typeOrm.config.ts schema:drop"
