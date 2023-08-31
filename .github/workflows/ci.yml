@@ -65,7 +65,6 @@ jobs:
       - name: Drop Db & Apply Migrations on CI DB
         run: |
           npm run typeorm:drop-schema
-          npm run typeorm:apply-migrations
 
       - name: Run e2e tests
         run: npm run test:e2e
