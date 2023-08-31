@@ -23,7 +23,7 @@ export default new DataSource({
   database: configService.get('POSTGRES_DB'),
   entities: ['src/**/*.entity{.ts,.js}'],
   migrationsTableName: 'migrations',
-  migrations: ['**/migrations/*{.ts,.js}'],
+  migrations: ['**/src/migrations/*{.ts}'],
   ssl: configService.get('POSTGRES_SHOULD_USE_SSL'),
   extra: {
     ssl: {
