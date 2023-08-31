@@ -12,6 +12,7 @@ README within the main src folder.
 - [Logging](#logging)
 - [Swagger](#swagger)
 - [Authentication](#authentication)
+- [Database](#database)
 - [Links](#🔗-links)
 
 ---
@@ -115,6 +116,22 @@ If we deconstruct the above we see 3 different properties:
 - userId: Quite self-explanatory, the Id of the user.
 
 ---
+
+### Database
+
+The API uses [TypeOrm](https://typeorm.io/). This allows the API to use an Orm instead of raw SQL, with the added bonus
+of being able to handle different databases if we wish so. Currently it is being developed against PostgreSQL using
+docker for the db instance and [Neon](https://neon.tech) for an on-cloud database instance - which will be utilized by
+our CI pipeline.
+
+A few things about TypeOrm
+
+- when new entities are added or current are edited a migration file needs to be created. Thankfully TypeOrm provide us
+  with that functionality and by using custom npm commands it is as easy as `npm run typeorm:generate-migration`
+
+- the migration file then needs to be applied to the target db instance, again using our custom made commands. It should
+  be noted that during the migration **generation** it compares the code entity representation with the status of the
+  target db. This is called code-first database design.
 
 ### 🔗 Links
 

@@ -7,7 +7,7 @@ import { EmailTemplate } from '@app/communication/email_templates.enum';
 import { UserDto } from '@app/users/dto/user.dto';
 import { Permission } from '@app/users/enums/permissions.enum';
 import { UserService } from '@app/users/user.service';
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 
@@ -29,10 +29,10 @@ export class AuthService {
    * @param {string} email : The email of the user.
    */
   async requestEmailMagicLoginAsync(email: string): Promise<void> {
-    const user = await this.userService.findOneByEmailAsync(email);
+    let user = await this.userService.findOneByEmailAsync(email);
 
     if (!user) {
-      throw new NotFoundException('User not found');
+      user = await this.userService.createAsync({ email: email });
     }
 
     await this.sendLoginEmailAsync(user);

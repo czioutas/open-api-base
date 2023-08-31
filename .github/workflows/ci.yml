@@ -8,10 +8,20 @@ on:
     branches: ["main"]
   pull_request:
     branches: ["main"]
+env:
+  # Setting an environment variable with the value of a configuration variable
+  POSTGRES_DB: ${{ vars.POSTGRES_DB }}
+  POSTGRES_PORT: ${{ vars.POSTGRES_PORT }}
+  POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+  APP_RUNTIME_USER: ${{ secrets.APP_RUNTIME_USER }}
+  APP_RUNTIME_USER_PASSWORD: ${{ secrets.APP_RUNTIME_USER_PASSWORD }}
+  POSTGRES_SHOULD_USE_SSL: ${{ vars.POSTGRES_SHOULD_USE_SSL }}
+  POSTGRES_REJECT_UNAUTHORIZED: ${{ vars.POSTGRES_SHOULD_USE_SSL }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: test
     defaults:
       run:
         working-directory: ./core/
@@ -51,6 +61,12 @@ jobs:
 
       - name: Build App
         run: npm run build --if-present
+
+      - name: Drop CI DB
+        run: npm run typeorm:drop-schema
+
+      - name: Apply Migrations on CI DB
+        run: npm run typeorm:apply-migrations
 
       - name: Run e2e tests
         run: npm run test:e2e
