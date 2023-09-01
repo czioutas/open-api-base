@@ -13,14 +13,13 @@
 #   ports:
 #     - "5432:5432"
 
-# openapibase:
-#   container_name: openapibase
-#   image: openapibase/openapibase
-#   env_file:
-#     - ./env.local
-#   ports:
-#     - "8000:8000"
-
+openapibase:
+  container_name: openapibase
+  image: openapibase
+  env_file:
+    - ./.env.local
+  ports:
+    - '3000:3000'
 # volumes:
 #   local_postgres_data: {}
 #   local_postgres_data_backups: {}
