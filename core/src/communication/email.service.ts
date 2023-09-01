@@ -1,11 +1,13 @@
 import { SENDGRID_CONFIG, SendGridConfig } from '@app/app.config';
 import { EmailTemplate } from '@app/communication/email_templates.enum';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import sgMail from '@sendgrid/mail';
 
 @Injectable()
 export class EmailService {
+  private readonly logger = new Logger(EmailService.name);
+
   private readonly sendGridConfig: SendGridConfig;
 
   constructor(configService: ConfigService) {
@@ -25,7 +27,8 @@ export class EmailService {
       dynamicTemplateData: dynamicTemplateData,
     };
     try {
-      await sgMail.send(msg);
+      const result = await sgMail.send(msg);
+      this.logger.log(`sending email[${templateName}] returned: ${result[0].statusCode}`);
     } catch (e) {
       throw new Error(`Could not send email: ${e}`);
     }
