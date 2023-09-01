@@ -61,7 +61,7 @@ export const configuration = () => ({
   sendgrid: {
     apiKey: process.env.SENDGRID_API_KEY,
     templates: {
-      magicLinkEmailId: process.env.SENDGRID_MAGIC_LINK_EMAIL_ID,
+      magicLinkEmailId: process.env.SENDGRID_SENDGRID_MAGIC_LINK_EMAIL_ID,
     },
     senderEmail: process.env.SENDGRID_SENDER_EMAIL,
   },

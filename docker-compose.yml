@@ -1,0 +1,26 @@
+# version: "3"
+
+# services:
+# devDB:
+#   container_name: devDB
+#   image: postgres:14-alpine
+#   restart: always
+#   env_file:
+#     - ./env.local
+#   volumes:
+#     - local_postgres_data:/var/lib/postgresql/data:Z
+#     - local_postgres_data_backups:/backups:z
+#   ports:
+#     - "5432:5432"
+
+# openapibase:
+#   container_name: openapibase
+#   image: openapibase/openapibase
+#   env_file:
+#     - ./env.local
+#   ports:
+#     - "8000:8000"
+
+# volumes:
+#   local_postgres_data: {}
+#   local_postgres_data_backups: {}
