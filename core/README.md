@@ -69,12 +69,13 @@ Refer to the [GitVersion.yml](../GitVersion.yml) file for changes.
 ### Documentation
 
 Within the application we strive to add as much useful documentation as possible. The application uses
-(Compodoc)[https://compodoc.app/] to visualize the whole state of the app (Modules, controllers etc).
+[Compodoc](https://compodoc.app/) to visualize the whole state of the app (Modules, controllers etc).
 
 In order to generate the documentation you can use the npm command `documentation`.
 
-We host everything on cloudflare pages, so the flow is that the documentation is generated before pushing and then
-hosted as simple html pages on cloudflare.
+We host everything on cloudflare pages, so the flow is that the documentation is generated as part of the cloudflare
+pages build, exported to /core/documentation as simple html and can be found at
+[https://open-api-base-documentation.pages.dev/documentation/](https://open-api-base-documentation.pages.dev/documentation/)
 
 ---
 
