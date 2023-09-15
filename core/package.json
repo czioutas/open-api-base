@@ -8,6 +8,7 @@
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "documentation:serve": "npx @compodoc/compodoc -p tsconfig.json --serve --theme stripe",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
@@ -39,6 +40,7 @@
     "@nestjs/passport": "^10.0.1",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/swagger": "^7.1.9",
+    "@nestjs/terminus": "^10.1.1",
     "@nestjs/typeorm": "^10.0.0",
     "@sendgrid/mail": "^7.7.0",
     "@timonmasberg/automapper-nestjs": "^0.0.0",

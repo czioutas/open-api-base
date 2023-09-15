@@ -1,0 +1,274 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>openapibase documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	   <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/dark.css">
+        <link rel="stylesheet" href="./styles/stripe.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="./" class="navbar-brand">openapibase documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<h1>Technical Details</h1>
+<p>Even though some of the info here span across the repo, such as the Version system. We detail it inside this Technical
+README within the main src folder.</p>
+<h3>Table of Contents</h3>
+<ul>
+<li><a href="#application">Application</a></li>
+<li><a href="#healtcheck">HealthCheck</a></li>
+<li><a href="#containerization">Containerization</a></li>
+<li><a href="#versioning">Versioning</a></li>
+<li><a href="#git">Git Specifics</a></li>
+<li><a href="#editor">Editor</a></li>
+<li><a href="#logging">Logging</a></li>
+<li><a href="#swagger">Swagger</a></li>
+<li><a href="#authentication">Authentication</a></li>
+<li><a href="#database">Database</a></li>
+<li><a href="#%F0%9F%94%97-links">Links</a></li>
+</ul>
+<hr>
+<h3>Application</h3>
+<p>The application runs by default on port 3000. Please edit the .env.YOUR-ENV file to change it.</p>
+<hr>
+<h3>HealthCheck</h3>
+<p>The application utilizes the package <a href="https://github.com/nestjs/terminus">terminus</a> to do healthchecks against different
+&quot;scopes&quot;. The default check is that of the Database.</p>
+<p>There are two endpoints:</p>
+<ul>
+<li><code>/v1/health</code> which actually checks the health status of services &amp; DB.</li>
+<li><code>/v1/health/q</code> which just returns 1. This should be a faster check if your API is actually up.</li>
+</ul>
+<hr>
+<h3>Containerization</h3>
+<p>The application comes by default with a simple container approach using Docker. You can find everything within
+<a href="../core/Dockerfile">Dockerfile</a> regarding the container and if you wish to run it using docker-compose you can use the
+<a href="../core/docker-compose.yml">docker-compose.yml</a> file.</p>
+<h3>Versioning</h3>
+<p>We release using GitVersion (<a href="https://github.com/GitTools/GitVersion">https://github.com/GitTools/GitVersion</a>)
+<a href="https://gitversion.net/docs/reference/intro-to-semver">https://gitversion.net/docs/reference/intro-to-semver</a></p>
+<ul>
+<li>we push from PR &amp; Master</li>
+<li>we use Mainline mode <a href="https://gitversion.net/docs/reference/versioning-modes/mainline-development">https://gitversion.net/docs/reference/versioning-modes/mainline-development</a></li>
+<li>and lastly we increment versions based on commits:</li>
+</ul>
+<div><pre class="line-numbers"><code class="language-none">major-version-bump-message: &#39;\+semver:\s?(breaking|major)&#39;
+minor-version-bump-message: &#39;\+semver:\s?(feature|minor)&#39;
+patch-version-bump-message: &#39;\+semver:\s?(fix|patch|task|info)&#39;</code></pre></div><p>For example, a commit message for a feature should look like this <code>+semver: feature </code> following the description of the
+changes.</p>
+<p>Refer to the <a href="../GitVersion.yml">GitVersion.yml</a> file for changes.</p>
+<hr>
+<h3>Git</h3>
+<p>In order to maintain consistency across any usage of the repo there are a few Git related changes.</p>
+<ul>
+<li><p>Using the <a href="../.gitattributes">.gitattributes</a> file we make sure the ending of all files when being committed are that
+of LF regardless of the OS you are working under.</p>
+</li>
+<li><p>Using the <a href="../.gitignore">.gitignore</a> file we make sure that not every file inside the repo when created locally is
+pushed to the remote repository. For example, test result results generated during local testing.</p>
+</li>
+</ul>
+<hr>
+<h3>Editor</h3>
+<p>In order to keep a uniform style of the codebase, we employ the use of the <a href="../.editorconfig">Editorconfig</a> file.</p>
+<p>Most code editors/IDE these days support the use of this file.</p>
+<p>It is worth mentioning that .editorconfig files work on a hierarchy based on folder levels. Therefore if you wish to
+have in one folder a different style you are free to add another .editorconfig file.</p>
+<hr>
+<h3>Logging</h3>
+<p>Logging requests is done using a battle-tested package named <code>winston</code>. For those familiar also with simple express
+setups, it is probably the default package for logging.</p>
+<p>In combination as we wish to send our logs to Logtail (Now known as Betterstack) we use their own package to change the
+transports. If you wish to change the logging service, all you need to do is add a different transport on the
+<a href="/core/src/logging.ts">logging.ts</a> file.</p>
+<hr>
+<h3>Swagger</h3>
+<hr>
+<h3>Authentication</h3>
+<p>The authentication system uses a &quot;MagicLink&quot;/&quot;Passwordless&quot; approach. There is no password involved and the only way for
+the user to be authenticated is by clicking on a link which is sent via Email.</p>
+<p>The flow is as follows: login/register -&gt; sent email with magic link -&gt; receive JWT token bundle</p>
+<p>The JWT Token bundle contains the following:</p>
+<div><pre class="line-numbers"><code class="language-none">/**
+ * This class is a wrapper dto that is sent after authentication.
+ * The idToken is used to get an accessToken
+ */
+export class AuthSuccessDto {
+  idToken: string;
+  refreshToken: string;
+  userId: string;
+}</code></pre></div><p>If we deconstruct the above we see 3 different properties:</p>
+<ul>
+<li><p>idToken: This is the JWT-Token which you can exchange for an AccessToken. IdTokens are only used for acquiring the
+AccessToken and do not have any other access.</p>
+</li>
+<li><p>refreshToken: This is another JWT-Token which is used to get a new IdToken after the current IdToken has expired. This
+is commonly used when a user has logged in but is inactive for X period of time. Then instead of forcing them through
+the whole re-login process we use the refreshToken to get our Tokens refreshed.</p>
+</li>
+<li><p>userId: Quite self-explanatory, the Id of the user.</p>
+</li>
+</ul>
+<hr>
+<h3>Database</h3>
+<p>The API uses <a href="https://typeorm.io/">TypeOrm</a>. This allows the API to use an Orm instead of raw SQL, with the added bonus
+of being able to handle different databases if we wish so. Currently it is being developed against PostgreSQL using
+docker for the db instance and <a href="https://neon.tech">Neon</a> for an on-cloud database instance - which will be utilized by
+our CI pipeline.</p>
+<p>A few things about TypeOrm</p>
+<ul>
+<li><p>when new entities are added or current are edited a migration file needs to be created. Thankfully TypeOrm provide us
+with that functionality and by using custom npm commands it is as easy as <code>npm run typeorm:generate-migration</code></p>
+</li>
+<li><p>the migration file then needs to be applied to the target db instance, again using our custom made commands. It should
+be noted that during the migration <strong>generation</strong> it compares the code entity representation with the status of the
+target db. This is called code-first database design.</p>
+</li>
+</ul>
+<h4>Logging SQL Statements</h4>
+<p>The application uses the <a href="../core/src/lib/database_logger.ts">DatabaseLogger</a> in order to log different SQL related
+info. Some are less critical than others and in order to avoid logging highly sensitive data without actual need, the
+logger distinguishes different use-cases such as <code>logQueryError</code> versus <code>logQuery</code>.</p>
+<p>The application configuration has a value <code>logSQL</code> which is true will log every query. This comes by default as true,
+but it is advised to disable it for production environments due to security concerns.</p>
+<hr>
+<h3>🔗 Links</h3>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th align="left">Function</th>
+<th align="left">ENV</th>
+<th align="left">URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Base URL</td>
+<td align="left">Local</td>
+<td align="left"><a href="http://localhost:3000/">http://localhost:3000/</a></td>
+</tr>
+<tr>
+<td align="left">API HealthCheck</td>
+<td align="left">Local</td>
+<td align="left"><a href="http://localhost:8000/v1/health">http://localhost:8000/v1/health</a></td>
+</tr>
+<tr>
+<td align="left">API HealthCheck</td>
+<td align="left">Local</td>
+<td align="left"><a href="http://localhost:8000/v1/health/q">http://localhost:8000/v1/health/q</a></td>
+</tr>
+<tr>
+<td align="left">API Swagger UI</td>
+<td align="left">Local</td>
+<td align="left"><a href="http://localhost:8000/api">http://localhost:8000/api</a></td>
+</tr>
+<tr>
+<td align="left">API Swagger JSON</td>
+<td align="left">Local</td>
+<td align="left"><a href="http://localhost:8000/api-json">http://localhost:8000/api-json</a></td>
+</tr>
+</tbody>
+</table>
+<br/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+
+       <script src="./js/menu-wc.js" defer></script>
+       <script nomodule src="./js/menu-wc_es5.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

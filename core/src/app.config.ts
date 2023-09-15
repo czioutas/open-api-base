@@ -7,6 +7,7 @@ export interface AppRuntimeConfig {
   appDomain: string;
   appPort: number;
   logserviceToken: string;
+  logSQL: boolean;
 }
 
 export interface JwtConfig {
@@ -45,6 +46,7 @@ export const configuration = () => ({
     appDomain: process.env.APP_DOMAIN,
     appPort: process.env.APP_PORT,
     logserviceToken: process.env.LOGSERVICE_TOKEN,
+    logSQL: process.env.LOG_SQL_STATEMENTS,
   },
   jwt: {
     audience: process.env.JWT_AUD,

@@ -6,6 +6,8 @@ README within the main src folder.
 ### Table of Contents
 
 - [Application](#application)
+- [HealthCheck](#healtcheck)
+- [Containerization](#containerization)
 - [Versioning](#versioning)
 - [Git Specifics](#git)
 - [Editor](#editor)
@@ -22,6 +24,24 @@ README within the main src folder.
 The application runs by default on port 3000. Please edit the .env.YOUR-ENV file to change it.
 
 ---
+
+### HealthCheck
+
+The application utilizes the package [terminus](https://github.com/nestjs/terminus) to do healthchecks against different
+"scopes". The default check is that of the Database.
+
+There are two endpoints:
+
+- `/v1/health` which actually checks the health status of services & DB.
+- `/v1/health/q` which just returns 1. This should be a faster check if your API is actually up.
+
+---
+
+### Containerization
+
+The application comes by default with a simple container approach using Docker. You can find everything within
+[Dockerfile](../core/Dockerfile) regarding the container and if you wish to run it using docker-compose you can use the
+[docker-compose.yml](../core/docker-compose.yml) file.
 
 ### Versioning
 
@@ -133,13 +153,25 @@ A few things about TypeOrm
   be noted that during the migration **generation** it compares the code entity representation with the status of the
   target db. This is called code-first database design.
 
+#### Logging SQL Statements
+
+The application uses the [DatabaseLogger](../core/src/lib/database_logger.ts) in order to log different SQL related
+info. Some are less critical than others and in order to avoid logging highly sensitive data without actual need, the
+logger distinguishes different use-cases such as `logQueryError` versus `logQuery`.
+
+The application configuration has a value `logSQL` which is true will log every query. This comes by default as true,
+but it is advised to disable it for production environments due to security concerns.
+
+---
+
 ### 🔗 Links
 
-| Function         | ENV   | URL                            |
-| :--------------- | :---- | :----------------------------- |
-| Base URL         | Local | http://localhost:3000/         |
-| API HealthCheck  | Local | http://localhost:8000/v1       |
-| API Swagger UI   | Local | http://localhost:8000/api      |
-| API Swagger JSON | Local | http://localhost:8000/api-json |
+| Function         | ENV   | URL                               |
+| :--------------- | :---- | :-------------------------------- |
+| Base URL         | Local | http://localhost:3000/            |
+| API HealthCheck  | Local | http://localhost:8000/v1/health   |
+| API HealthCheck  | Local | http://localhost:8000/v1/health/q |
+| API Swagger UI   | Local | http://localhost:8000/api         |
+| API Swagger JSON | Local | http://localhost:8000/api-json    |
 
 <br/>
