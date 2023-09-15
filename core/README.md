@@ -9,6 +9,7 @@ README within the main src folder.
 - [HealthCheck](#healtcheck)
 - [Containerization](#containerization)
 - [Versioning](#versioning)
+- [Documentation](#documentation)
 - [Git Specifics](#git)
 - [Editor](#editor)
 - [Logging](#logging)
@@ -62,6 +63,18 @@ For example, a commit message for a feature should look like this `+semver: feat
 changes.
 
 Refer to the [GitVersion.yml](../GitVersion.yml) file for changes.
+
+---
+
+### Documentation
+
+Within the application we strive to add as much useful documentation as possible. The application uses
+(Compodoc)[https://compodoc.app/] to visualize the whole state of the app (Modules, controllers etc).
+
+In order to generate the documentation you can use the npm command `documentation`.
+
+We host everything on cloudflare pages, so the flow is that the documentation is generated before pushing and then
+hosted as simple html pages on cloudflare.
 
 ---
 
