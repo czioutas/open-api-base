@@ -1,4 +1,4 @@
-import { Permission } from '@app/users/enums/permissions.enum';
+import { Permission } from '@app/auth/permission.enum';
 import { AutoMap } from '@automapper/classes';
 import { IsUUID } from 'class-validator';
 

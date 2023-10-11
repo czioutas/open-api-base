@@ -16,6 +16,8 @@ README within the main src folder.
 - [Swagger](#swagger)
 - [Authentication](#authentication)
 - [Database](#database)
+- [Commands](#commands)
+- [Database Seed](#database-seed)
 - [Links](#🔗-links)
 
 ---
@@ -175,6 +177,22 @@ logger distinguishes different use-cases such as `logQueryError` versus `logQuer
 
 The application configuration has a value `logSQL` which is true will log every query. This comes by default as true,
 but it is advised to disable it for production environments due to security concerns.
+
+---
+
+### Commands
+
+Running specific code outside of the running app can be done using commands. More or less like a cli but executing any
+code within your code-base. For example see Database Seeding
+
+---
+
+### Database-seed
+
+There are some domains that require an initialization of the database with data. The Default User Roles is one of them.
+
+In order to do so we created a command that will run any service function as part of the seeding process. To execute use
+`npm run cli seed` which executes the command seed found under `seeder.command.ts`
 
 ---
 

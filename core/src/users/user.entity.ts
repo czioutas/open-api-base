@@ -1,6 +1,7 @@
 import { BaseEntity } from '@app/lib/base.entity';
+import { UserRoleEntity } from '@app/user-role/entities/user-role.entity';
 import { AutoMap } from '@automapper/classes';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 
 @Entity()
 export class UserEntity extends BaseEntity {
@@ -19,4 +20,9 @@ export class UserEntity extends BaseEntity {
   @Column()
   @AutoMap()
   email: string;
+
+  @ManyToMany(() => UserRoleEntity, { cascade: true, nullable: true })
+  @JoinTable()
+  @AutoMap()
+  roles: UserRoleEntity[];
 }

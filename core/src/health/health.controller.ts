@@ -1,4 +1,6 @@
+import { Permissions } from '@app/auth/decorators/permissions.decorator';
 import { Public } from '@app/auth/decorators/public.decorator';
+import { Permission } from '@app/auth/permission.enum';
 import { Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { HealthCheck, HealthCheckService, TypeOrmHealthIndicator } from '@nestjs/terminus';
@@ -23,6 +25,7 @@ export class HealthController {
 
   @Get('/q')
   @HealthCheck()
+  @Permissions(Permission.CREATE_COMPANY)
   checkQuick() {
     return 1;
   }
