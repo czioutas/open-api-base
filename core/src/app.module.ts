@@ -1,7 +1,10 @@
 import { PGSQL_CONFIG, PgsqlDbConfig, configuration } from '@app/app.config';
 import { AuthController } from '@app/auth/auth.controller';
 import { JwtAuthGuard } from '@app/auth/guards/jwt-auth.guard';
+import { PermissionGuard } from '@app/auth/guards/permission.guard';
 import { AllExceptionsFilter } from '@app/filters/all-exceptions.filter';
+import HealthModule from '@app/health/health.module';
+import { DatabaseLogger } from '@app/lib/database_logger';
 import { AppLoggerMiddleware } from '@app/middleware/app_logger.middleware';
 import { classes } from '@automapper/classes';
 import {
@@ -13,12 +16,16 @@ import {
 } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_FILTER, APP_GUARD, APP_PIPE } from '@nestjs/core';
+import { TerminusModule } from '@nestjs/terminus';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AutomapperModule } from '@timonmasberg/automapper-nestjs';
-import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
 import { CommunicationModule } from './communication/communication.module';
+import { HealthController } from './health/health.controller';
+import { UserRoleModule } from './user-role/user-role.module';
 import { UserModule } from './users/user.module';
+import { SeederService } from './seeder/seeder.service';
+import { SeederModule } from './seeder/seeder.module';
 
 @Module({
   imports: [
@@ -35,6 +42,7 @@ import { UserModule } from './users/user.module';
       useFactory: (configService: ConfigService) => {
         const pgsqlConfig = configService.get<PgsqlDbConfig>(PGSQL_CONFIG);
         return {
+          logger: new DatabaseLogger(configService),
           type: 'postgres',
           host: pgsqlConfig.host,
           port: pgsqlConfig.port,
@@ -51,11 +59,15 @@ import { UserModule } from './users/user.module';
         };
       },
     }),
+    TerminusModule,
     UserModule,
     AuthModule,
     CommunicationModule,
+    HealthModule,
+    UserRoleModule,
+    SeederModule,
   ],
-  controllers: [AppController, AuthController],
+  controllers: [AuthController, HealthController],
   providers: [
     {
       provide: APP_PIPE,
@@ -76,10 +88,11 @@ import { UserModule } from './users/user.module';
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
     },
-    // {
-    //   provide: APP_INTERCEPTOR,
-    //   useClass: RlsInterceptor,
-    // },
+    {
+      provide: APP_GUARD,
+      useClass: PermissionGuard,
+    },
+    SeederService,
   ],
 })
 export class AppModule {
