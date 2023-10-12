@@ -2,7 +2,6 @@ import { PGSQL_CONFIG, PgsqlDbConfig, configuration } from '@app/app.config';
 import { AuthController } from '@app/auth/auth.controller';
 import { JwtAuthGuard } from '@app/auth/guards/jwt-auth.guard';
 import { PermissionGuard } from '@app/auth/guards/permission.guard';
-import { CloudStorageModule } from '@app/cloud-storage/cloud-storage.module';
 import { EncryptionModule } from '@app/encryption/encryption.module';
 import { AllExceptionsFilter } from '@app/filters/all-exceptions.filter';
 import HealthModule from '@app/health/health.module';
@@ -69,7 +68,6 @@ import { UserModule } from './users/user.module';
     UserRoleModule,
     SeederModule,
     EncryptionModule,
-    CloudStorageModule,
   ],
   controllers: [AuthController, HealthController],
   providers: [
