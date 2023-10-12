@@ -2,6 +2,7 @@ export const APP_RUNTIME_CONFIG = 'appRuntime';
 export const JWT_CONFIG = 'jwt';
 export const SENDGRID_CONFIG = 'sendgrid';
 export const PGSQL_CONFIG = 'pgsql';
+export const ENCRYPTION_CONFIG = 'encryption';
 
 export interface AppRuntimeConfig {
   appDomain: string;
@@ -41,6 +42,11 @@ export interface PgsqlDbConfig {
   runMigrations: boolean;
 }
 
+export interface EncryptionConfig {
+  RSAPublicKey: string;
+  RSAPrivateKey: string;
+}
+
 export const configuration = () => ({
   appRuntime: {
     appDomain: process.env.APP_DOMAIN,
@@ -77,5 +83,9 @@ export const configuration = () => ({
     rejectUnauthorized: process.env.POSTGRES_REJECT_UNAUTHORIZED,
     dropDb: process.env.POSTGRES_DROP_DB,
     runMigrations: process.env.POSTGRES_RUN_MIGRATIONS,
+  },
+  encryption: {
+    RSAPublicKey: process.env.ENCRYPTION_RSA_PUBLIC_KEY,
+    RSAPrivateKey: process.env.ENCRYPTION_RSA_PRIVATE_KEY,
   },
 });

@@ -2,6 +2,7 @@ import { PGSQL_CONFIG, PgsqlDbConfig, configuration } from '@app/app.config';
 import { AuthController } from '@app/auth/auth.controller';
 import { JwtAuthGuard } from '@app/auth/guards/jwt-auth.guard';
 import { PermissionGuard } from '@app/auth/guards/permission.guard';
+import { EncryptionModule } from '@app/encryption/encryption.module';
 import { AllExceptionsFilter } from '@app/filters/all-exceptions.filter';
 import HealthModule from '@app/health/health.module';
 import { DatabaseLogger } from '@app/lib/database_logger';
@@ -22,10 +23,10 @@ import { AutomapperModule } from '@timonmasberg/automapper-nestjs';
 import { AuthModule } from './auth/auth.module';
 import { CommunicationModule } from './communication/communication.module';
 import { HealthController } from './health/health.controller';
+import { SeederModule } from './seeder/seeder.module';
+import { SeederService } from './seeder/seeder.service';
 import { UserRoleModule } from './user-role/user-role.module';
 import { UserModule } from './users/user.module';
-import { SeederService } from './seeder/seeder.service';
-import { SeederModule } from './seeder/seeder.module';
 
 @Module({
   imports: [
@@ -66,6 +67,7 @@ import { SeederModule } from './seeder/seeder.module';
     HealthModule,
     UserRoleModule,
     SeederModule,
+    EncryptionModule,
   ],
   controllers: [AuthController, HealthController],
   providers: [
