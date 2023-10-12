@@ -2,6 +2,7 @@ export const APP_RUNTIME_CONFIG = 'appRuntime';
 export const JWT_CONFIG = 'jwt';
 export const SENDGRID_CONFIG = 'sendgrid';
 export const PGSQL_CONFIG = 'pgsql';
+export const ENCRYPTION_CONFIG = 'encryption';
 export const CLOUD_STORAGE_CONFIG = 'cloudstorage';
 
 export interface AppRuntimeConfig {
@@ -49,6 +50,11 @@ export interface CloudStorageConfig {
   bucket: string;
 }
 
+export interface EncryptionConfig {
+  RSAPublicKey: string;
+  RSAPrivateKey: string;
+}
+
 export const configuration = () => ({
   appRuntime: {
     appDomain: process.env.APP_DOMAIN,
@@ -91,5 +97,9 @@ export const configuration = () => ({
     secretAccessKey: process.env.DO_SPACES_SECRET_ACCESS_KEY,
     endpoint: process.env.DO_SPACES_ENDPOINT,
     bucket: process.env.DO_SPACES_BUCKET_NAME,
+  },
+  encryption: {
+    RSAPublicKey: process.env.ENCRYPTION_RSA_PUBLIC_KEY,
+    RSAPrivateKey: process.env.ENCRYPTION_RSA_PRIVATE_KEY,
   },
 });

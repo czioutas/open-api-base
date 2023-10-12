@@ -34,6 +34,8 @@ _this does not include, build time, waiting for CI, googling, etc._
 - Exception handling
 - Health Checks endpoint (Quick or Database check as minimum)
 - Cloud Storage (S3 compatible)
+- Swagger API
+- Auto generated Documentation see [Demo documentation](https://open-api-base-documentation.pages.dev/documentation/)
 
 ### Technologies
 
