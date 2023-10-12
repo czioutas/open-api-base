@@ -18,6 +18,7 @@ README within the main src folder.
 - [Database](#database)
 - [Commands](#commands)
 - [Database Seed](#database-seed)
+- [Encryption](#encryption)
 - [Links](#🔗-links)
 
 ---
@@ -193,6 +194,14 @@ There are some domains that require an initialization of the database with data.
 
 In order to do so we created a command that will run any service function as part of the seeding process. To execute use
 `npm run cli seed` which executes the command seed found under `seeder.command.ts`
+
+---
+
+### Encryption
+
+If we wish to encrypt specific data before storing them or any other reason, the encryption service is there for us.
+With two simple methods `encrypt` and `decrypt` we can safely handle our data as long as we load the same key pair via
+our config.
 
 ---
 

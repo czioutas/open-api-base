@@ -33,6 +33,8 @@ _this does not include, build time, waiting for CI, googling, etc._
 - Email Communication (The API uses [Sendgrid](https://sendgrid.com/) but you can switch to any provider)
 - Exception handling
 - Health Checks endpoint (Quick or Database check as minimum)
+- Swagger API
+- Auto generated Documentation see [Demo documentation](https://open-api-base-documentation.pages.dev/documentation/)
 
 ### Technologies
 
